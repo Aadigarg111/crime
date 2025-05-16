@@ -19,162 +19,69 @@
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     #game-container {
-      border: 2px solid #ffffff;
-      width: 320px;
-      height: 320px;
+      border: 2px solid #fff;
+      width: 300px;
+      height: 300px;
       position: relative;
       background-color: #1e1e1e;
       overflow: hidden;
-      margin-top: 20px;
+      margin-top: 40px;
     }
 
     .box {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       background-color: #03dac6;
       position: absolute;
+      cursor: pointer;
       border-radius: 5px;
-      cursor: pointer;
     }
 
-    #score, #lives {
-      margin-top: 10px;
+    #score {
+      margin-top: 15px;
       font-size: 1.2rem;
-    }
-
-    #game-over {
-      display: none;
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #restart-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #03dac6;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      color: #000;
-      font-weight: bold;
-    }
-
-    #restart-btn:hover {
-      background-color: #00b3a1;
     }
   </style>
 </head>
 <body>
 
   <h1>🚧 Portfolio is Under Development 🚧</h1>
-  <p>Can you catch the box?</p>
+  <p>Meanwhile, try this quick game!</p>
 
   <div id="game-container"></div>
   <div id="score">Score: 0</div>
-  <div id="lives">Lives: 3</div>
-
-  <div id="game-over">
-    <h2>Game Over</h2>
-    <p>Your final score: <span id="final-score">0</span></p>
-    <button id="restart-btn">Restart Game</button>
-  </div>
 
   <script>
     const container = document.getElementById('game-container');
     const scoreDisplay = document.getElementById('score');
-    const livesDisplay = document.getElementById('lives');
-    const gameOverScreen = document.getElementById('game-over');
-    const finalScore = document.getElementById('final-score');
-    const restartBtn = document.getElementById('restart-btn');
-
     let score = 0;
-    let lives = 3;
-    let boxSpeed = 1200; // Start speed (ms)
-    let moveInterval;
-    let box;
 
-    function createBox() {
-      box = document.createElement('div');
+    function spawnBox() {
+      const box = document.createElement('div');
       box.classList.add('box');
-      container.appendChild(box);
+      const size = 30;
+      const maxLeft = container.clientWidth - size;
+      const maxTop = container.clientHeight - size;
 
-      moveBox();
+      box.style.left = Math.floor(Math.random() * maxLeft) + 'px';
+      box.style.top = Math.floor(Math.random() * maxTop) + 'px';
 
       box.addEventListener('click', () => {
         score++;
         scoreDisplay.textContent = `Score: ${score}`;
-        increaseDifficulty();
-        moveBox();
+        box.remove();
+        spawnBox();
       });
 
-      moveInterval = setInterval(() => {
-        lives--;
-        updateLives();
-        if (lives > 0) {
-          moveBox();
-        } else {
-          endGame();
-        }
-      }, boxSpeed);
+      container.appendChild(box);
     }
 
-    function moveBox() {
-      if (!box) return;
-
-      const maxLeft = container.clientWidth - box.offsetWidth;
-      const maxTop = container.clientHeight - box.offsetHeight;
-
-      const newLeft = Math.floor(Math.random() * maxLeft);
-      const newTop = Math.floor(Math.random() * maxTop);
-
-      box.style.left = `${newLeft}px`;
-      box.style.top = `${newTop}px`;
-
-      clearInterval(moveInterval);
-      moveInterval = setInterval(() => {
-        lives--;
-        updateLives();
-        if (lives > 0) {
-          moveBox();
-        } else {
-          endGame();
-        }
-      }, boxSpeed);
-    }
-
-    function updateLives() {
-      livesDisplay.textContent = `Lives: ${lives}`;
-    }
-
-    function increaseDifficulty() {
-      if (boxSpeed > 400) {
-        boxSpeed -= 50; // Increase speed by reducing delay
-      }
-    }
-
-    function endGame() {
-      clearInterval(moveInterval);
-      box.remove();
-      gameOverScreen.style.display = 'block';
-      finalScore.textContent = score;
-    }
-
-    restartBtn.addEventListener('click', () => {
-      score = 0;
-      lives = 3;
-      boxSpeed = 1200;
-      scoreDisplay.textContent = `Score: ${score}`;
-      livesDisplay.textContent = `Lives: ${lives}`;
-      gameOverScreen.style.display = 'none';
-      createBox();
-    });
-
-    // Start game
-    createBox();
+    // Initial box
+    spawnBox();
   </script>
 
 </body>
