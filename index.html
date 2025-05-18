@@ -3,86 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio Under Development</title>
+  <title>Website Seized by Delhi Police</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #ffffff;
+      background-color: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
     }
 
-    h1 {
-      font-size: 2.5rem;
+    .container {
+      background-color: white;
+      border: 3px solid #b71c1c;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 40px;
+      max-width: 650px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
       margin-bottom: 20px;
     }
 
-    #game-container {
-      border: 2px solid #fff;
-      width: 300px;
-      height: 300px;
-      position: relative;
-      background-color: #1e1e1e;
-      overflow: hidden;
-      margin-top: 40px;
+    h1 {
+      color: #b71c1c;
+      font-size: 2.2em;
+      margin-bottom: 10px;
     }
 
-    .box {
-      width: 30px;
-      height: 30px;
-      background-color: #03dac6;
-      position: absolute;
-      cursor: pointer;
-      border-radius: 5px;
+    .subheading {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
     }
 
-    #score {
-      margin-top: 15px;
-      font-size: 1.2rem;
+    .notice-box {
+      background-color: #fff3f3;
+      border-left: 5px solid #d32f2f;
+      text-align: left;
+      padding: 20px;
+      font-size: 1em;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/0/09/Delhi_Police_Logo.png?20191212170657" alt="Delhi Police Logo" />
+    <h1>WEBSITE SEIZED</h1>
+    <div class="subheading">By Cyber Crime Cell - Delhi Police</div>
+    
+    <div class="notice-box">
+      <p>This website has been taken down by the <span class="bold">Cyber Crime Unit of the Delhi Police</span> under provisions of the Indian Copyright Act, 1957.</p>
+      <p><strong>Reason:</strong> Hosting and distribution of pirated or copyrighted content without authorization.</p>
+      <p>An FIR has been registered and legal proceedings are underway. Accessing, duplicating, or attempting to revive this site may result in criminal prosecution.</p>
+    </div>
 
-  <h1>🚧 Portfolio is Under Development 🚧</h1>
-  <p>Meanwhile, try this quick game!</p>
-
-  <div id="game-container"></div>
-  <div id="score">Score: 0</div>
-
-  <script>
-    const container = document.getElementById('game-container');
-    const scoreDisplay = document.getElementById('score');
-    let score = 0;
-
-    function spawnBox() {
-      const box = document.createElement('div');
-      box.classList.add('box');
-      const size = 30;
-      const maxLeft = container.clientWidth - size;
-      const maxTop = container.clientHeight - size;
-
-      box.style.left = Math.floor(Math.random() * maxLeft) + 'px';
-      box.style.top = Math.floor(Math.random() * maxTop) + 'px';
-
-      box.addEventListener('click', () => {
-        score++;
-        scoreDisplay.textContent = `Score: ${score}`;
-        box.remove();
-        spawnBox();
-      });
-
-      container.appendChild(box);
-    }
-
-    // Initial box
-    spawnBox();
-  </script>
-
+    <div class="footer">
+      Crime Branch | Delhi Police<br>
+      Government of NCT of Delhi
+    </div>
+  </div>
 </body>
 </html>
